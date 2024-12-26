@@ -1,0 +1,11 @@
+groups:
+  - name: snort-alerts
+    rules:
+      - alert: SSHBruteForceDetected
+        expr: increase(snort_ssh_brute_force_total[1m]) > 5
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "SSH Brute Force Detected"
+          description: "More than 5 brute force attempts detected in the last minute."
